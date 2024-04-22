@@ -4,7 +4,7 @@ Projeto extensionista
 
 -
 
-- [x] Tela home
+- [x] Tela inicial
     - [ ] estilizar
 - [ ] Tela Login
     - [ ] estilizar
