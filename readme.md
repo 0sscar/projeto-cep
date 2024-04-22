@@ -6,7 +6,7 @@ Projeto extensionista
 
 - [x] Tela inicial
     - [ ] estilizar
-- [ ] Tela Login
+- [ ] Tela de Login
     - [ ] estilizar
 - [ ] Tela contatos
     - [ ] estilizar
