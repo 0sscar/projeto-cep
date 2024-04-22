@@ -4,11 +4,11 @@ Projeto extensionista
 
 -
 
-*- [x] Tela home
-    *- [ ] estilizar
-*- [ ] Tela Login
-    *- [ ] estilizar
-*- [ ] Tela contatos
-    *- [ ] estilizar
-*- [ ] Adicionar mapa
-*- [ ] Adicionar Navegação de telas
+- [x] Tela home
+    - [ ] estilizar
+- [ ] Tela Login
+    - [ ] estilizar
+- [ ] Tela contatos
+    - [ ] estilizar
+- [ ] Adicionar mapa
+- [ ] Adicionar Navegação de telas
