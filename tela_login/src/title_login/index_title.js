@@ -6,7 +6,7 @@ import styles from "./style_ttlogin"
 
 export default function TitleLog() {
     return(
-        <View style = {styles.boxlogin}>
+        <View>
             <Text style = {styles.textTitu}>Login</Text>
 
 

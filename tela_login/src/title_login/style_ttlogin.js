@@ -1,22 +1,23 @@
 import { StyleSheet } from "react-native";
+import TitleLog from "./index_title";
 
 const styles = StyleSheet.create({
     textTitu: {
-        flex:1,
+        
         color: "#007FFF",
-        alignItems: 'center',
-        justifyContent: 'center',
-        alignContent:'center',
+        fontSize: 24,
+        fontWeight: "bold",
+        alignItems: "flex-start",
         
         
 
 
     },
     boxlogin: {
-        flex:1,
-        backgroundColor:"#FFD700",
-        alignItems:'center',
-        justifyContent:'center',
+        
+        alignItems:"center",
+        justifyContent:"center",
+        padding: 10,
 
         
     },
