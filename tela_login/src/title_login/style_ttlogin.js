@@ -1,13 +1,26 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-    Txtitulo: {
-        alignItems: "center",
-        fontSize:"35",
-        color: "#007FFF"
+    textTitu: {
+        flex:1,
+        color: "#007FFF",
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignContent:'center',
+        
+        
 
 
-    }
+    },
+    boxlogin: {
+        flex:1,
+        backgroundColor:"#FFD700",
+        alignItems:'center',
+        justifyContent:'center',
+
+        
+    },
 
 
 })
+export default styles
