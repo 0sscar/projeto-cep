@@ -3,7 +3,7 @@ import TitleLog from "./index_title";
 
 const styles = StyleSheet.create({
     textTitu: {
-        
+        alignItems: "center",
         color: "#007FFF",
         fontSize: 24,
         fontWeight: "bold",
