@@ -3,39 +3,44 @@ import { View, Text, TextInput, Button, TouchableOpacity } from "react-native";
 import styles from "./style_contents";
 
 export default function AreaLogin(){
-    //const [user, setUser] = useState=('');
-    //const [senha, setSenha] = useState=('');
+   
+    //definindo usuario 
+    const usuario = 'joaoentregas';
+    const senha = 'cep1234';
+    
+    //useState para validaçao
+    const [username, setUsername] = useState('');
+    const [password, setSenha] = useState('');
 
-    return(
-        <View>
+    //funçao verificaçao
+    function verifyLogin(){
+        if (setUsername == usuario && setSenha == senha){
             
+        }
 
-            <View style ={styles.inputBox}>
+    }
+    return(
+        <View>            
+            <View>
                 <TextInput 
                 style = {styles.campoTexto}
                 placeholder=" usuário"
+                onChangeText={text=>setUsername(text)}                
                 ></TextInput>
-            </View>
-            
-
-           
-
-            <View style ={styles.inputBox}>
+            </View>                       
+            <View>
                 <TextInput 
                 style = {styles.campoTexto}
                 placeholder=" senha"
+                onChangeText={text=>setSenha(text)}
                 secureTextEntry={true}
                 ></TextInput>
-            </View>
-            
-
-            <TouchableOpacity style = {styles.btLogar}>
+            </View>                     
+            <TouchableOpacity 
+                style = {styles.btLogar}
+                onPress={verifyLogin()}>                
                 <Text style = {styles.txtButton}>Entrar</Text>
             </TouchableOpacity>
-
-            
-
-           
         </View>
     );
 }

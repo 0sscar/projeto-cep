@@ -1,27 +1,66 @@
-import { StyleSheet, Text, View, TouchableOpacity, Modal, StatusBar} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Modal, StatusBar, TextInput} from 'react-native';
 import Titulo from './src/components/title/index_title';
-import AreaLogin from './src/components/content/index_content';
-import { useState } from 'react';
+import styles from './src/components/content/style_contents';
+import React, { useState } from 'react';
 
 export default function App() {
 
+  //definindo usuario 
+  const usuario = 'joao';
+  const senha = '1234';
+  
+  //useState para validaçao
+  const [username, setUsername] = useState('');
+  const [password, setSenha] = useState('');
+
+  //state do modal
   const [modalActive, setModalActive] = useState(true)
-  return (
-    <View style={styles.container}>
+
+  //funçao verificaçao
+  function verifyLogin(){
+    if(username == usuario && password == senha){
+      modalActive(false);
+    }
+    else{<Text>Usuário ou senha inválido</Text>}
+  
+
+  }
+
+  return ( 
+    <View style={main.container}>
       <Modal
         animationType='fade'
         transparent={true}
         visible={modalActive}>
         
-        <View style={styles.outerView}>
-          <View style={styles.modalView}>
+        <View style={main.outerView}>
+          <View style={main.modalView}>
             <Titulo/>
-            <AreaLogin/>
+            <TextInput
+            placeholder="usuario"
+            style = {styles.campoTexto}
+            onChangeText={setUsername}
+            value={username}
+            ></TextInput>
 
+           
 
-          </View>
+            <TextInput                        
+            placeholder='senha'
+            style = {styles.campoTexto}
+            onChangeText={setSenha}
+            value={password}
+            secureTextEntry={(true)}
+            ></TextInput>
 
+            <TouchableOpacity
+            style={styles.btLogar}
+            onPress={verifyLogin()}
+            ><Text
+            style={styles.txtButton}>Entrar</Text>
+            </TouchableOpacity>
 
+        </View>
         </View>
       </Modal>
 
@@ -30,7 +69,7 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
+const main = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -44,6 +83,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#add8e6'
   },
   modalView:{
+    
     backgroundColor:"#fff", //cor final"#0000FF"
     borderRadius: 20,
     padding: 90,

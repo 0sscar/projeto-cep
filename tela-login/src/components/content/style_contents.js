@@ -19,11 +19,13 @@ const styles = StyleSheet.create({
         paddingRight: 50,
     },
     campoTexto:{
-        backgroundColor:" #ffff00",
-        borderRadius:"10%",
-        height: 250,
+        backgroundColor:'rgba(0,0,255,0.2)',
+        color:'#0000FF',
+        
+        borderBottomColor:"#a5a",
+        height: 40,
         margin:20,
-        width:200,
+        width:180,
         
         
     },
@@ -33,10 +35,10 @@ const styles = StyleSheet.create({
         paddingTop:7,
         padding:14,
         paddingBottom:10,
-        margin:30,
-        marginTop:40,
-        marginLeft:75,
-        width:90,
+        margin:40,
+        marginTop:27,
+        
+        width:100,
         alignItems: "center",
         justifyContent:'center'
         
