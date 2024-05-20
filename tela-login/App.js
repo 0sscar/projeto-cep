@@ -3,6 +3,16 @@ import Titulo from './src/components/title/index_title';
 import styles from './src/components/content/style_contents';
 import React, { useState } from 'react';
 
+
+function verifyLogin(username, password,usuario,senha,setModalActive){
+  alert('oi')
+  if(username == usuario && password == senha){
+    setModalActive(false);
+  }
+  else{<Text>Usuário ou senha inválido</Text>}
+
+
+}
 export default function App() {
 
   //definindo usuario 
@@ -16,19 +26,12 @@ export default function App() {
   //state do modal
   const [modalActive, setModalActive] = useState(true)
 
-  //funçao verificaçao
-  function verifyLogin(){
-    if(username == usuario && password == senha){
-      modalActive(false);
-    }
-    else{<Text>Usuário ou senha inválido</Text>}
-  
-
-  }
 
   return ( 
     <View style={main.container}>
+      <Text>oi.</Text>
       <Modal
+
         animationType='fade'
         transparent={true}
         visible={modalActive}>
@@ -55,7 +58,7 @@ export default function App() {
 
             <TouchableOpacity
             style={styles.btLogar}
-            onPress={verifyLogin()}
+            onPress={()=>verifyLogin(username, password,usuario,senha,setModalActive)}
             ><Text
             style={styles.txtButton}>Entrar</Text>
             </TouchableOpacity>
