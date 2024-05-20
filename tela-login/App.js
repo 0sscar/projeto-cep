@@ -5,11 +5,11 @@ import React, { useState } from 'react';
 
 
 function verifyLogin(username, password,usuario,senha,setModalActive){
-  alert('oi')
+  
   if(username == usuario && password == senha){
     setModalActive(false);
   }
-  else{<Text>Usuário ou senha inválido</Text>}
+  else{alert('Login Inválido')}
 
 
 }
@@ -29,7 +29,7 @@ export default function App() {
 
   return ( 
     <View style={main.container}>
-      <Text>oi.</Text>
+      <Text>0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</Text>
       <Modal
 
         animationType='fade'
@@ -83,7 +83,7 @@ const main = StyleSheet.create({
     flex: 1,
     alignItems:'center',
     justifyContent: 'center',
-    backgroundColor: '#add8e6'
+    
   },
   modalView:{
     
