@@ -15,9 +15,7 @@ export default function App() {
   return ( 
     <View >
       
-      <Image source={require('./assets/wallpaper.jpeg')}
-        style={styles.foto}
-      ></Image>
+      
       <Modalogin/>
 
     </View>
