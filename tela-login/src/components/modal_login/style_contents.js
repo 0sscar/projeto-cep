@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 
-import AreaLogin from "./index_home";
 
 const styles = StyleSheet.create({
     

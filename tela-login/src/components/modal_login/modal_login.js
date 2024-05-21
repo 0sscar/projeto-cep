@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 //modulos
 import Titulo from '../title/index_title';
-import styles from '../content/style_contents';
+import styles from './style_contents';
 
 
 

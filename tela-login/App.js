@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 
 //modulos
 import Modalogin from './src/components/modal_login/modal_login';
-import Home from './src/components/home_teste/index_home';
+
+import Titulo from './src/components/title/index_title';
 
 
 
@@ -13,10 +14,20 @@ export default function App() {
 
   return ( 
     <View >
-      <Home/>
       
+      <Image source={require('./assets/wallpaper.jpeg')}
+        style={styles.foto}
+      ></Image>
       <Modalogin/>
 
     </View>
   );
 }
+const styles = StyleSheet.create({
+  foto:{
+    flex:1,
+    width:1450,
+    height:630
+
+  }
+})
