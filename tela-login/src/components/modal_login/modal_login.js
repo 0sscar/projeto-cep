@@ -9,7 +9,7 @@ import styles from './style_contents';
 
 const usuario = 'joao';
 const senha = '1234';
-const SECRET_KEY = 'alignjhurtonebixahdhif'; // Chave secreta para criptografia
+const SECRET_KEY = 'chave_secreta'; // Chave secreta para criptografia
 
 
 export default function Modalogin() {
@@ -39,7 +39,6 @@ export default function Modalogin() {
   const descriptografar = (textoCriptografado) => {
     const bytes = CryptoJS.AES.decrypt(textoCriptografado, SECRET_KEY);
     const decriptado = bytes.toString(CryptoJS.enc.Utf8);
-    console.log("Senha descriptografada");
     return decriptado;
   };
 
@@ -69,6 +68,7 @@ export default function Modalogin() {
   const verifyLogin = (username, password) => {
     if (username === usuario && password === senha ) {
       setModalActive(false);
+      console.log("Logado com Sucesso");
       salvar('SaveName', username);
       salvar('SaveSenha', senhaCript);
       salvar('SavePhone', phone);
@@ -94,10 +94,6 @@ export default function Modalogin() {
 
   return (
     <View style={main.container}>
-      <Text>{storageName}</Text>
-      <Text>{storageSenha}</Text>
-      <Text>{senhaDescript}</Text>
-      <Text>{storagePhone}</Text>
       <Modal
         animationType='fade'
         transparent={true}
@@ -157,7 +153,7 @@ const main = StyleSheet.create({
     justifyContent: 'center',
   },
   modalView: {
-    backgroundColor: '#2a48f5',
+    backgroundColor: '#0776a6',
     borderRadius: 20,
     padding: 90,
     alignItems: 'center',
