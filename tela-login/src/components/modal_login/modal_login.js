@@ -7,8 +7,6 @@ import CryptoJS from 'crypto-js';
 import Titulo from '../title/index_title';
 import styles from './style_contents';
 
-const usuario = 'joao';
-const senha = '1234';
 const SECRET_KEY = 'chave_secreta'; // Chave secreta para criptografia
 
 
@@ -16,7 +14,6 @@ export default function Modalogin() {
   // UseState para validação
   const [username, setUsername] = useState('');
   const [password, setSenha] = useState('');
-  const [phone, setPhone] = useState('');
 
   // State do modal
   const [modalActive, setModalActive] = useState(true);
@@ -24,7 +21,6 @@ export default function Modalogin() {
   // UseState para storage
   const [storageName, setStname] = useState('');
   const [storageSenha, setSTsenha] = useState('');
-  const [storagePhone, setSTphone] = useState('');
 
   // Função para criptografar
   const criptografar = (texto) => {
@@ -33,7 +29,7 @@ export default function Modalogin() {
     return criptado;
   };
 
-  const senhaCript = criptografar(senha);
+ // const senhaCript = criptografar(senha);
 
   // Função para descriptografar
   const descriptografar = (textoCriptografado) => {
@@ -42,13 +38,14 @@ export default function Modalogin() {
     return decriptado;
   };
 
-  const senhaDescript = descriptografar(senhaCript)
+  //const senhaDescript = descriptografar(senhaCript)
 
 
   // Função para salvar no AsyncStorage
   const salvar = async (chave, valor) => {
     try {
       await AsyncStorage.setItem(chave, valor);
+      
     } catch (e) {
       alert('Erro ao salvar no AsyncStorage:', e);
     }
@@ -58,6 +55,7 @@ export default function Modalogin() {
   const buscar = async (chave) => {
     try {
       const valor = await AsyncStorage.getItem(chave);
+      
       return valor;
     } catch (e) {
       alert('Erro ao buscar do AsyncStorage:', e);
@@ -65,41 +63,44 @@ export default function Modalogin() {
   };
 
   // Função para verificar login
-  const verifyLogin = (username, password) => {
-    if (username === usuario && password === senha ) {
-      setModalActive(false);
+  const verifyLogin = async (username, password) => {
+    
+  const testename = await buscar('SaveName');
+  const testesenha = await buscar('SaveSenha');
+
+    if (username === testename && descriptografar(password) === descriptografar(testesenha) ) {
+      
+      
       console.log("Logado com Sucesso");
-      salvar('SaveName', username);
-      salvar('SaveSenha', senhaCript);
-      salvar('SavePhone', phone);
+      setModalActive(false);
     } 
     else{alert("Login Inválido");}
     
   };
-
-  // Carregar dados do AsyncStorage ao montar o componente
-  useEffect(() => {
-    const carregarDados = async () => {
-      const nomeSalvo = await buscar('SaveName');
-      const senhaSalva = await buscar('SaveSenha');
-      const telefoneSalvo = await buscar('SavePhone');
-
-      if (nomeSalvo) setStname(nomeSalvo);
-      if (senhaSalva) setSTsenha(senhaSalva);
-      if (telefoneSalvo) setSTphone(telefoneSalvo);
+  
+  //funçao registrar
+  const registrar = async (username, password) => {
+  
+  salvar('SaveName', username);
+  salvar('SaveSenha', password);
     };
-
-    carregarDados();
-  }, []);
 
   return (
     <View style={main.container}>
+      
+      <Text>{storageName}</Text>
+      <Text>{storageSenha}</Text>
+      
+      
+
       <Modal
         animationType='fade'
         transparent={true}
         visible={modalActive}
       >
         <View style={main.outerView}>
+              
+
           <View style={main.modalView}>
             <Titulo />
             <Text style={styles.subtit}>Bem-vindo(a)</Text>
@@ -120,18 +121,18 @@ export default function Modalogin() {
               secureTextEntry={true}
             />
 
-            <Text style={styles.textoTl}>Telefone:</Text>
-            <TextInput
-              style={styles.campoTexto}
-              onChangeText={setPhone}
-              value={phone}
-            />
 
             <TouchableOpacity
               style={styles.btLogar}
-              onPress={() => verifyLogin(username, password)}
+              onPress={() => verifyLogin(username, criptografar(password))}
             >
               <Text style={styles.txtButton}>Entrar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.btLogar}
+              onPress={() => registrar(username, criptografar(password))}
+            >
+              <Text style={styles.txtButton}>registrar</Text>
             </TouchableOpacity>
           </View>
         </View>

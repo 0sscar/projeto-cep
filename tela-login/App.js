@@ -15,17 +15,8 @@ export default function App() {
   return ( 
     <View >
       
-      
       <Modalogin/>
 
     </View>
   );
 }
-const styles = StyleSheet.create({
-  foto:{
-    flex:1,
-    width:1450,
-    height:630
-
-  }
-})
