@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity, Modal, TextInput } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import CryptoJS from 'crypto-js';
 
 // Módulos
