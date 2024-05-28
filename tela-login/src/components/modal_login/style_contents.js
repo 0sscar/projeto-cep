@@ -51,7 +51,23 @@ const styles = StyleSheet.create({
         padding:14,
         paddingBottom:15,
         margin:40,
-        marginTop:27,
+        marginTop:15,
+        
+        width:'190%',
+        alignItems: "center",
+        justifyContent:'center'
+        
+        
+    },
+    
+    btRegistrar:{
+        borderRadius:50,
+        backgroundColor:"#ffd700",
+        paddingTop:10,
+        padding:14,
+        paddingBottom:15,
+        margin:40,
+        marginTop:5,
         
         width:'190%',
         alignItems: "center",

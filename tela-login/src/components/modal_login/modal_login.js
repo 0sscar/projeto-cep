@@ -71,19 +71,42 @@ export default function Modalogin() {
     if (username === testename && descriptografar(password) === descriptografar(testesenha) ) {
       
       
-      console.log("Logado com Sucesso");
+      alert("Logado com Sucesso");
       setModalActive(false);
     } 
-    else{alert("Login Inválido");}
+    else{
+      alert("Login Inválido. Registre-se");
+      setVisible(true);
+    }
     
+  };
+  
+  function campoVazio (){
+    
+  if(username == null || password == null ){
+    return alert("Campos faltando");
+  }
+
+  };
+  // state para sumir botão
+  const [btnVisible, setVisible] = useState(true);
+
+  //funçao sumir botao
+
+  const hideButton = () => {
+    setVisible(false);
   };
   
   //funçao registrar
   const registrar = async (username, password) => {
-  
+
+  campoVazio()
   salvar('SaveName', username);
   salvar('SaveSenha', password);
-    };
+  alert('Usuário Cadastrado')
+  hideButton()
+  
+  };
 
   return (
     <View style={main.container}>
@@ -120,20 +143,25 @@ export default function Modalogin() {
               value={password}
               secureTextEntry={true}
             />
-
-
+            { btnVisible && (
             <TouchableOpacity
               style={styles.btLogar}
+             
+              onPress={() => registrar(username, criptografar(password))}
+             
+            >
+              <Text style={styles.txtButton}>Registrar</Text>
+            </TouchableOpacity>
+            )}
+
+            
+            <TouchableOpacity
+              style={styles.btRegistrar}
               onPress={() => verifyLogin(username, criptografar(password))}
             >
               <Text style={styles.txtButton}>Entrar</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.btLogar}
-              onPress={() => registrar(username, criptografar(password))}
-            >
-              <Text style={styles.txtButton}>registrar</Text>
-            </TouchableOpacity>
+
           </View>
         </View>
       </Modal>
@@ -160,6 +188,7 @@ const main = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: 300,
-    height: 480,
+    height: 500,
   },
+
 });
