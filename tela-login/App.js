@@ -4,7 +4,7 @@ import { View, StyleSheet } from 'react-native';
 import Modalogin from './src/components/modal_login/modal_login';
 
 
-/*
+
 
 const Mapa = () => {
   const googleApiKey = "AIzaSyD8OZEHbRuZSeWDRE4X4Ls5dHCCv46C-nk"; // Substitua pela sua chave de API do Google
@@ -187,7 +187,7 @@ const Mapa = () => {
     </body>
     </html>
   `;
-*/
+
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1 }}>
@@ -202,7 +202,7 @@ const Mapa = () => {
       </View>
     </View>
   );
-
+};
 //*to chamando o modal dentro desse view mas da erro na hora de executar "Native crypto module could not be used to get secure random number."
 const styles = StyleSheet.create({
   

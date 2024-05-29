@@ -4,6 +4,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     
     subtit:{
+        flex:1,
         color:'#ffd700',
         fontSize:14,
         margin:0,
@@ -14,6 +15,7 @@ const styles = StyleSheet.create({
     },
     
     textoUs:{
+        flex:1,
         fontWeight:"italic",
         fontSize:18,
         color:"#ffd700",
@@ -27,14 +29,9 @@ const styles = StyleSheet.create({
         paddingTop:0,
         paddingRight:153,
     },
-    textoTl:{
-        fontWeight:"italic",
-        fontSize:18,
-        color:"#ffd700",
-        paddingTop:0,
-        paddingRight:142,
-    },
+    
     campoTexto:{
+        flex:1,
         color:'#d4d3f5',
         fontSize:20,
         borderBottomWidth:1,
@@ -45,6 +42,7 @@ const styles = StyleSheet.create({
         
     },
     btLogar:{
+        flex:1,
         borderRadius:50,
         backgroundColor:"#ffd700",
         paddingTop:10,
@@ -52,15 +50,13 @@ const styles = StyleSheet.create({
         paddingBottom:15,
         margin:40,
         marginTop:15,
-        
         width:'190%',
         alignItems: "center",
         justifyContent:'center'
-        
-        
     },
     
     btRegistrar:{
+        flex:1,
         borderRadius:50,
         backgroundColor:"#ffd700",
         paddingTop:10,
@@ -68,7 +64,6 @@ const styles = StyleSheet.create({
         paddingBottom:15,
         margin:40,
         marginTop:5,
-        
         width:'190%',
         alignItems: "center",
         justifyContent:'center'
@@ -76,6 +71,7 @@ const styles = StyleSheet.create({
         
     },
     txtButton:{
+        flex:1,
         fontSize:19,
         color: '#0776a6',
         fontWeight:"bold",

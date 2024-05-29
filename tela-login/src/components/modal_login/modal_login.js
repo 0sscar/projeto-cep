@@ -9,37 +9,31 @@ import styles from './style_contents';
 
 const SECRET_KEY = 'chave_secreta'; // Chave secreta para criptografia
 
-
 export default function Modalogin() {
   // UseState para validação
   const [username, setUsername] = useState('');
-  const [password, setSenha] = useState('');
+  const [password, setPassword] = useState('');
 
   // State do modal
   const [modalActive, setModalActive] = useState(true);
 
-  // UseState para storage
-  const [storageName, setStname] = useState('');
-  const [storageSenha, setSTsenha] = useState('');
+  // State para sumir botão
+  const [btnVisible, setVisible] = useState(true);
 
   // Função para criptografar
   const criptografar = (texto) => {
-    const criptado = sjcl.encrypt(texto, SECRET_KEY)
-    console.log("Senha criptografada")
-    return criptado;
+    return sjcl.encrypt(SECRET_KEY, texto);
   };
 
   // Função para descriptografar
   const descriptografar = (textoCriptografado) => {
-    const decriptado = sjcl.decrypt(textoCriptografado, SECRET_KEY);
-    return decriptado;
+    return sjcl.decrypt(SECRET_KEY, textoCriptografado);
   };
 
   // Função para salvar no AsyncStorage
   const salvar = async (chave, valor) => {
     try {
       await AsyncStorage.setItem(chave, valor);
-      
     } catch (e) {
       alert('Erro ao salvar no AsyncStorage:', e);
     }
@@ -49,7 +43,6 @@ export default function Modalogin() {
   const buscar = async (chave) => {
     try {
       const valor = await AsyncStorage.getItem(chave);
-      
       return valor;
     } catch (e) {
       alert('Erro ao buscar do AsyncStorage:', e);
@@ -58,66 +51,55 @@ export default function Modalogin() {
 
   // Função para verificar login
   const verifyLogin = async (username, password) => {
-    
-  const testename = await buscar('SaveName');
-  const testesenha = await buscar('SaveSenha');
+    const storedUsername = await buscar('SaveName');
+    const storedPassword = await buscar('SaveSenha');
 
-    if (username === testename && descriptografar(password) === descriptografar(testesenha) ) {
-      
-      
-      alert("Logado com Sucesso");
-      setModalActive(false);
-    } 
-    else{
-      alert("Login Inválido. Registre-se");
+    if (storedUsername && storedPassword) {
+      const decryptedStoredPassword = descriptografar(storedPassword);
+      if (username === storedUsername && password === decryptedStoredPassword) {
+        alert("Logado com Sucesso");
+        setModalActive(false);
+      } else {
+        alert("Login Inválido. Registre-se");
+        setVisible(true);
+      }
+    } else {
+      alert("Usuário não encontrado. Registre-se");
       setVisible(true);
     }
-    
   };
-  
-  function campoVazio (){
-    
-  if(username == null || password == null ){
-    return alert("Campos faltando");
-  }
 
+  const campoVazio = () => {
+    if (!username || !password) {
+      alert("Campos faltando");
+      return true;
+    }
+    return false;
   };
-  // state para sumir botão
-  const [btnVisible, setVisible] = useState(true);
 
-  //funçao sumir botao
+  // Função registrar
+  const registrar = async (username, password) => {
+    if (campoVazio()) return;
+    const encryptedPassword = criptografar(password);
+    await salvar('SaveName', username);
+    await salvar('SaveSenha', encryptedPassword);
+    alert('Usuário Cadastrado');
+    hideButton();
+  };
 
+  // Função para sumir botão
   const hideButton = () => {
     setVisible(false);
-  };
-  
-  //funçao registrar
-  const registrar = async (username, password) => {
-
-  campoVazio()
-  salvar('SaveName', username);
-  salvar('SaveSenha', password);
-  alert('Usuário Cadastrado')
-  hideButton()
-  
   };
 
   return (
     <View style={main.container}>
-      
-      <Text>{storageName}</Text>
-      <Text>{storageSenha}</Text>
-      
-      
-
       <Modal
         animationType='fade'
         transparent={true}
         visible={modalActive}
       >
         <View style={main.outerView}>
-              
-
           <View style={main.modalView}>
             <Titulo />
             <Text style={styles.subtit}>Bem-vindo(a)</Text>
@@ -133,29 +115,25 @@ export default function Modalogin() {
             <Text style={styles.textoPs}>Senha:</Text>
             <TextInput
               style={styles.campoTexto}
-              onChangeText={setSenha}
+              onChangeText={setPassword}
               value={password}
               secureTextEntry={true}
             />
-            { btnVisible && (
-            <TouchableOpacity
-              style={styles.btLogar}
-             
-              onPress={() => registrar(username, criptografar(password))}
-             
-            >
-              <Text style={styles.txtButton}>Registrar</Text>
-            </TouchableOpacity>
+            {btnVisible && (
+              <TouchableOpacity
+                style={styles.btRegistrar}
+                onPress={() => registrar(username, password)}
+              >
+                <Text style={styles.txtButton}>Registrar</Text>
+              </TouchableOpacity>
             )}
 
-            
             <TouchableOpacity
-              style={styles.btRegistrar}
-              onPress={() => verifyLogin(username, criptografar(password))}
+              style={styles.btLogar}
+              onPress={() => verifyLogin(username, password)}
             >
               <Text style={styles.txtButton}>Entrar</Text>
             </TouchableOpacity>
-
           </View>
         </View>
       </Modal>
@@ -176,6 +154,7 @@ const main = StyleSheet.create({
     justifyContent: 'center',
   },
   modalView: {
+    flex:1,
     backgroundColor: '#0776a6',
     borderRadius: 20,
     padding: 90,
@@ -184,5 +163,4 @@ const main = StyleSheet.create({
     width: 300,
     height: 500,
   },
-
 });
