@@ -2,9 +2,7 @@ import React from 'react';
 import { WebView } from 'react-native-webview';
 import { View, StyleSheet } from 'react-native';
 import Modalogin from './src/components/modal_login/modal_login';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import Titulo from './src/components/title/index_title';
 
 const Mapa = () => {
   const googleApiKey = "AIzaSyD8OZEHbRuZSeWDRE4X4Ls5dHCCv46C-nk"; // Substitua pela sua chave de API do Google
