@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity, Modal, TextInput } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState } from 'react';
-import CryptoJS from 'crypto-js';
+import sjcl from 'sjcl';
 
 // Módulos
 import Titulo from '../title/index_title';
@@ -24,22 +24,16 @@ export default function Modalogin() {
 
   // Função para criptografar
   const criptografar = (texto) => {
-    const criptado = CryptoJS.AES.encrypt(texto, SECRET_KEY).toString();
+    const criptado = sjcl.encrypt(texto, SECRET_KEY)
     console.log("Senha criptografada")
     return criptado;
   };
 
- // const senhaCript = criptografar(senha);
-
   // Função para descriptografar
   const descriptografar = (textoCriptografado) => {
-    const bytes = CryptoJS.AES.decrypt(textoCriptografado, SECRET_KEY);
-    const decriptado = bytes.toString(CryptoJS.enc.Utf8);
+    const decriptado = sjcl.decrypt(textoCriptografado, SECRET_KEY);
     return decriptado;
   };
-
-  //const senhaDescript = descriptografar(senhaCript)
-
 
   // Função para salvar no AsyncStorage
   const salvar = async (chave, valor) => {
