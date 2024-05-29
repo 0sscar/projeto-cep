@@ -197,11 +197,13 @@ const Mapa = () => {
           style={{ flex: 1 }}
         />
       </View>
-      
+      <View>
+        <Modalogin /> 
+      </View>
     </View>
   );
 };
-
+//*to chamando o modal dentro desse view mas da erro na hora de executar "Native crypto module could not be used to get secure random number."
 const styles = StyleSheet.create({
   
 });
