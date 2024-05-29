@@ -1,6 +1,10 @@
 import React from 'react';
 import { WebView } from 'react-native-webview';
 import { View, StyleSheet } from 'react-native';
+import Modalogin from './src/components/modal_login/modal_login';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import Titulo from './src/components/title/index_title';
 
 const Mapa = () => {
   const googleApiKey = "AIzaSyD8OZEHbRuZSeWDRE4X4Ls5dHCCv46C-nk"; // Substitua pela sua chave de API do Google
@@ -186,23 +190,20 @@ const Mapa = () => {
 
   return (
     <View style={{ flex: 1 }}>
-      <WebView
-        originWhitelist={['*']}
-        source={{ html: htmlContent }}
-        style={{ flex: 1 }}
-      />
-    
-    </View> 
-
-    /*tentei chamar o modal por aqui coolocando um view e a tag dele dentro mas sempre dava o erro:
-    "Native crypto module could not be used to get secure random number."*/
+      <View style={{ flex: 1 }}>
+        <WebView
+          originWhitelist={['*']}
+          source={{ html: htmlContent }}
+          style={{ flex: 1 }}
+        />
+      </View>
+      
+    </View>
   );
 };
 
-
-
 const styles = StyleSheet.create({
-  // Substitua pela sua chave de API do Google
+  
 });
 
 export default Mapa;

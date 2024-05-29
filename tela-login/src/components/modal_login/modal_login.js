@@ -2,9 +2,6 @@ import { StyleSheet, Text, View, TouchableOpacity, Modal, TextInput } from 'reac
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState } from 'react';
 import CryptoJS from 'crypto-js';
-// Adicione estas linhas no início do seu arquivo index.js
-import './shim.js';
-
 
 // Módulos
 import Titulo from '../title/index_title';
