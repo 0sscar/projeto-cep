@@ -102,10 +102,8 @@ export default function Modalogin() {
         <View style={main.outerView}>
           <View style={main.modalView}>
             <Titulo />
-            <Text style={styles.subtit}>Bem-vindo(a)</Text>
-            <Text style={styles.subtit}>de volta!</Text>
-
             <Text style={styles.textoUs}>Usuário:</Text>
+            
             <TextInput
               style={styles.campoTexto}
               onChangeText={setUsername}
@@ -154,11 +152,10 @@ const main = StyleSheet.create({
     justifyContent: 'center',
   },
   modalView: {
-    flex:1,
     backgroundColor: '#0776a6',
     borderRadius: 20,
     padding: 90,
-    alignItems: 'center',
+    
     justifyContent: 'center',
     width: 300,
     height: 500,

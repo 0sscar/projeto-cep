@@ -5,10 +5,11 @@ const styles = StyleSheet.create({
 
     txtLogin:{
         paddingTop: 15,
-        margin:18,
+        margin:1,
+        alignSelf:'center',
         fontWeight:"bold",
         color:"#ffd700",
-        fontSize: 36,
+        fontSize: 30,
     }
 })
 

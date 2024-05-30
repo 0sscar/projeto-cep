@@ -3,13 +3,10 @@ import { WebView } from 'react-native-webview';
 import { View, StyleSheet } from 'react-native';
 import Modalogin from './src/components/modal_login/modal_login';
 
-
-
-
 const Mapa = () => {
   const googleApiKey = "AIzaSyD8OZEHbRuZSeWDRE4X4Ls5dHCCv46C-nk"; // Substitua pela sua chave de API do Google
 
-  const htmlContent =  `
+  const htmlContent = `
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -158,6 +155,8 @@ const Mapa = () => {
               .catch(err => console.error('Erro na requisição:', err));
           });
         }
+
+        window.addEventListener('load', initMap);
       </script>
     </head>
     <body>
@@ -165,7 +164,7 @@ const Mapa = () => {
         <div class="title-style">Busca CEP</div>
         <div class="search-container">
           <input type="text" id="cepInput" class="input-style" placeholder="Insira o CEP..."/>
-          <button class="botao-search" onclick="initMap()">
+          <button class="botao-search">
             <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
           </button>
         </div>
@@ -198,14 +197,15 @@ const Mapa = () => {
         />
       </View>
       <View>
-        <Modalogin/> 
+      <Modalogin/>        
       </View>
     </View>
   );
 };
 //*to chamando o modal dentro desse view mas da erro na hora de executar "Native crypto module could not be used to get secure random number."
+
 const styles = StyleSheet.create({
-  
+  // Adicione seus estilos aqui, se necessário
 });
 
 export default Mapa;

@@ -3,38 +3,33 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     
-    subtit:{
-        flex:1,
-        color:'#ffd700',
-        fontSize:14,
-        margin:0,
-        alignContent:'center',
-        alignItems:'center',
-        justifyContent:'center',
-       
-    },
-    
     textoUs:{
-        flex:1,
-        fontWeight:"italic",
-        fontSize:18,
+        
+        fontSize:20,
         color:"#ffd700",
-        paddingTop:12,
-        paddingRight:147,
+        margin:12,
+        paddingTop:29,
+        paddingRight:0,
+        alignSelf:'center',
+
     },
     textoPs:{
-        fontWeight:"italic",
-        fontSize:18,
+        fontSize:20,
         color:"#ffd700",
+        margin:12,
         paddingTop:0,
-        paddingRight:153,
+        paddingRight:1,
+        alignSelf:'center',
+
     },
     
     campoTexto:{
         flex:1,
+        alignSelf:'center',
         color:'#d4d3f5',
-        fontSize:20,
+        fontSize:15,
         borderBottomWidth:1,
+        paddingTop:12,
         height: 40,
         margin:18,
         width:210,
@@ -42,15 +37,17 @@ const styles = StyleSheet.create({
         
     },
     btLogar:{
+        
         flex:1,
         borderRadius:50,
         backgroundColor:"#ffd700",
-        paddingTop:10,
+        paddingTop:25,
         padding:14,
         paddingBottom:15,
         margin:40,
         marginTop:15,
         width:'190%',
+        alignSelf:'center',
         alignItems: "center",
         justifyContent:'center'
     },
@@ -59,22 +56,19 @@ const styles = StyleSheet.create({
         flex:1,
         borderRadius:50,
         backgroundColor:"#ffd700",
-        paddingTop:10,
+        paddingTop:25,
         padding:14,
         paddingBottom:15,
         margin:40,
         marginTop:5,
         width:'190%',
+        alignSelf:'center',
         alignItems: "center",
         justifyContent:'center'
         
         
     },
     txtButton:{
-        flex:1,
-        fontSize:19,
-        color: '#0776a6',
-        fontWeight:"bold",
     }
 })
 
