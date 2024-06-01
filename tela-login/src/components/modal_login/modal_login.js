@@ -102,6 +102,7 @@ export default function Modalogin() {
         <View style={main.outerView}>
           <View style={main.modalView}>
             <Titulo />
+
             <Text style={styles.textoUs}>Usuário:</Text>
             
             <TextInput
@@ -111,6 +112,7 @@ export default function Modalogin() {
             />
 
             <Text style={styles.textoPs}>Senha:</Text>
+            
             <TextInput
               style={styles.campoTexto}
               onChangeText={setPassword}

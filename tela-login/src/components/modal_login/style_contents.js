@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     
     textoUs:{
-        
+        fontFamily:'Droid Serif',
         fontSize:20,
         color:"#ffd700",
         margin:12,
@@ -24,12 +24,16 @@ const styles = StyleSheet.create({
     },
     
     campoTexto:{
+        backgroundColor:"#1087cc",
         flex:1,
+        fontSize:190,
         alignSelf:'center',
-        color:'#d4d3f5',
+        color:'#d4d3f5',   //'#d4d3f5'
         fontSize:15,
-        borderBottomWidth:1,
-        paddingTop:12,
+        borderBottomWidth:16,
+        borderBottomColor:"#1087cc",
+        borderRadius:5,
+        paddingTop:22,
         height: 40,
         margin:18,
         width:210,
