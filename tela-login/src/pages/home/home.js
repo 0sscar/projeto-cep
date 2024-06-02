@@ -123,7 +123,7 @@ const Home = (props) => {
           document.getElementById('cepInput').addEventListener('blur', function() {
             const cep = this.value.replace(/\\D/g, '');
             if (cep.length !== 8) {
-              console.log('CEP inválido.');
+              alert('CEP inválido.');
               document.getElementById('addressInfo').style.display = 'none';
               return;
             }
@@ -161,7 +161,7 @@ const Home = (props) => {
     </head>
     <body>
       <div class="container">
-        <div class="title-style">Busca CEP</div>
+        <div class="title-style">Vai pra onde ?</div>
         <div class="search-container">
           <input type="text" id="cepInput" class="input-style" placeholder="Insira o CEP..."/>
           <button class="botao-search">
