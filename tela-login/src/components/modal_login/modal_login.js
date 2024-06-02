@@ -1,10 +1,9 @@
-import { StyleSheet, Text, View, TouchableOpacity, Modal, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Modal, TextInput , Separator} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState } from 'react';
 import sjcl from 'sjcl';
 
 // Módulos
-import Titulo from '../title/index_title';
 import styles from './style_contents';
 
 const SECRET_KEY = 'chave_secreta'; // Chave secreta para criptografia
@@ -100,41 +99,52 @@ export default function Modalogin() {
         visible={modalActive}
       >
         <View style={main.outerView}>
-          <View style={main.modalView}>
-            <Titulo />
 
-            <Text style={styles.textoUs}>Usuário:</Text>
-            
-            <TextInput
-              style={styles.campoTexto}
-              onChangeText={setUsername}
-              value={username}
-            />
+          <View style={styles.viewTitulo}>
 
-            <Text style={styles.textoPs}>Senha:</Text>
+            <Text style={styles.titulo}>Bem-vindo(a) de volta !</Text>
+            <Text style={styles.subTit}>Faça login ou cadastre-se </Text>
+
             
-            <TextInput
-              style={styles.campoTexto}
-              onChangeText={setPassword}
-              value={password}
-              secureTextEntry={true}
-            />
-            {btnVisible && (
+            <View style={styles.viewForm}>
+              <Text style={styles.textoUs}>Usuário:</Text>
+              
+              <TextInput
+                style={styles.campoTexto}
+                onChangeText={setUsername}
+                value={username}
+              />
+
+              <Text style={styles.textoPs}>Senha:</Text>
+              
+              <TextInput
+                style={styles.campoTexto}
+                onChangeText={setPassword}
+                value={password}
+                secureTextEntry={true}
+              />
+              {btnVisible && (
+                <TouchableOpacity
+                  //style={styles.btRegistrar}
+                  onPress={() => registrar(username, password)}
+                >
+                  <Text style={styles.txtRegistrar}>Registrar-se</Text>
+                </TouchableOpacity>
+              )}
+
               <TouchableOpacity
-                style={styles.btRegistrar}
-                onPress={() => registrar(username, password)}
+                style={styles.btLogar}
+                onPress={() => verifyLogin(username, password)}
               >
-                <Text style={styles.txtButton}>Registrar</Text>
+                <Text style={styles.txtButtonEntrar}>Entrar</Text>
               </TouchableOpacity>
-            )}
+            
+            </View>
 
-            <TouchableOpacity
-              style={styles.btLogar}
-              onPress={() => verifyLogin(username, password)}
-            >
-              <Text style={styles.txtButton}>Entrar</Text>
-            </TouchableOpacity>
           </View>
+
+          <View style={{backgroundColor:'#0776a6',flex:1}}></View>
+
         </View>
       </Modal>
     </View>
@@ -145,20 +155,15 @@ const main = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   outerView: {
+    backgroundColor: '#3A8592',
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   modalView: {
     backgroundColor: '#0776a6',
     borderRadius: 20,
     padding: 90,
-    
-    justifyContent: 'center',
     width: 300,
     height: 500,
   },
