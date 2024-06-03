@@ -102,7 +102,9 @@ export default function Modalogin() {
       >
         <View style={main.outerView}>
 
-          <View style={styles.viewTitulo}>
+          <Animatable.View 
+          animation='fadeInDown'
+          style={styles.viewTitulo}>
 
             <Text style={styles.titulo}>Bem-vindo(a) de volta !</Text>
             <Text style={styles.subTit}>Faça login ou cadastre-se </Text>
@@ -146,11 +148,7 @@ export default function Modalogin() {
             
             </Animatable.View>
 
-          </View>
-
-          {/*<Animatable.View 
-      
-            style={{backgroundColor:'#0776a6',flex:1}}></Animatable.View>*/}
+          </Animatable.View>
 
         </View>
       </Modal>

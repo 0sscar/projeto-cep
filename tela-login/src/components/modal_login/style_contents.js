@@ -5,14 +5,18 @@ const styles = StyleSheet.create({
 
     viewTitulo:{
         backgroundColor:'#3A8592',
+        marginTop:150,
+        paddingHorizontal:20,
     },
     viewForm:{
-        
+        marginTop:10,
         paddingTop:10,
+        paddingBottom:500,
         borderTopLeftRadius:50,
         borderTopRightRadius:50,
         backgroundColor:"#0776a6",
-        elevation:23
+        elevation:23,
+        
     },
     titulo:{
         fontSize:20,
@@ -56,7 +60,7 @@ const styles = StyleSheet.create({
         alignSelf:'center',
         justifyContent:'center',
         color:'#d4d3f5',   //'#d4d3f5'
-        fontSize:15,
+        fontSize:22,
         borderBottomWidth:16,
         borderBottomColor:"#1087cc",
         borderRadius:7,
