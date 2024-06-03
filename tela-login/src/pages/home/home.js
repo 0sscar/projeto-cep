@@ -132,7 +132,10 @@ const Home = (props) => {
       }
     </style>
     <script>
+      teste = 1;
+
       function initMap() {
+
         const map = new google.maps.Map(document.getElementById('map'), {
           center: { lat: -23.5505, lng: -46.6333 },
           zoom: 15
@@ -141,15 +144,14 @@ const Home = (props) => {
           position: { lat: -23.5505, lng: -46.6333 },
           map: map
         });
-
-        document.getElementById('cepInput').addEventListener('blur', function() {
+        function myFunc() {
           const cep = this.value.replace(/\\D/g, '');
           if (cep.length !== 8) {
             alert('CEP inválido.');
             document.getElementById('addressInfo').style.display = 'none';
             return;
           }
-
+    
           fetch(\`https://viacep.com.br/ws/\${cep}/json/\`)
             .then(res => res.json())
             .then(data => {
@@ -164,7 +166,7 @@ const Home = (props) => {
               document.getElementById('uf').value = data.uf;
               document.getElementById('addressInfo').style.display = 'block';
               window.ReactNativeWebView.postMessage(JSON.stringify(data));
-
+    
               fetch(\`https://maps.googleapis.com/maps/api/geocode/json?address=\${cep},BR&key=${googleApiKey}\`)
                 .then(res => res.json())
                 .then(data => {
@@ -176,9 +178,11 @@ const Home = (props) => {
                 });
             })
             .catch(err => console.error('Erro na requisição:', err));
-        });
+        }
+
+        document.getElementById('cepInput').addEventListener('blur', myFunc);
       }   
-      window.addEventListener('load', initMap);
+      
 
       function handleShareButtonClick() {
         window.ReactNativeWebView.postMessage(JSON.stringify({ type: 'share' }));
@@ -190,7 +194,7 @@ const Home = (props) => {
       <div class="title-style">Vai pra onde ?</div>
       <div class="search-container">
         <input type="text" id="cepInput" class="input-style" placeholder="Insira o CEP..."/>
-        <button class="botao-search">
+        <button class="botao-search" id ="buscar">
           <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="yellow"/><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
         </button>
       </div>
