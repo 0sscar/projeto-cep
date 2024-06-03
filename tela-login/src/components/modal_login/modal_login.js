@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity, Modal, TextInput} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import sjcl from 'sjcl';
 import * as Animatable from 'react-native-animatable'
 
@@ -10,10 +10,27 @@ import styles from './style_contents';
 
 const SECRET_KEY = 'chave_secreta'; // Chave secreta para criptografia
 
+
 export default function Modalogin() {
+
   // UseState para validação
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  //const para verificar tempo de login
+  const Login = [username,password]
+
+  //salvando momento de login
+  const saveLoginTime = async () => {
+    const now = Date.now().toString();
+
+    try {
+      await AsyncStorage.setItem('SavedLogin',now) } 
+
+    catch (error) {
+      console.error('Error saving login time', error); }
+  }
+
 
   // State do modal
   const [modalActive, setModalActive] = useState(true);
@@ -39,6 +56,7 @@ export default function Modalogin() {
       alert('Erro ao salvar no AsyncStorage:', e);
     }
   };
+  
 
   // Função para buscar do AsyncStorage
   const buscar = async (chave) => {
@@ -59,7 +77,9 @@ export default function Modalogin() {
       const decryptedStoredPassword = descriptografar(storedPassword);
       if (username === storedUsername && password === decryptedStoredPassword) {
         alert("Logado com Sucesso");
-        setModalActive(false);
+        //setModalActive(false);
+        checkLoginStatus();
+  
       } else {
         alert("Login Inválido. Registre-se");
         setVisible(true);
