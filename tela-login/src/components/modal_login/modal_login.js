@@ -1,10 +1,12 @@
-import { StyleSheet, Text, View, TouchableOpacity, Modal, TextInput , Separator} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Modal, TextInput} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState } from 'react';
 import sjcl from 'sjcl';
+import * as Animatable from 'react-native-animatable'
 
-// Módulos
+// Módulo style dos componentes
 import styles from './style_contents';
+////////
 
 const SECRET_KEY = 'chave_secreta'; // Chave secreta para criptografia
 
@@ -106,7 +108,10 @@ export default function Modalogin() {
             <Text style={styles.subTit}>Faça login ou cadastre-se </Text>
 
             
-            <View style={styles.viewForm}>
+            <Animatable.View 
+              delay={200}
+              animation='fadeInUp'
+              style={styles.viewForm}>
               <Text style={styles.textoUs}>Usuário:</Text>
               
               <TextInput
@@ -139,11 +144,13 @@ export default function Modalogin() {
                 <Text style={styles.txtButtonEntrar}>Entrar</Text>
               </TouchableOpacity>
             
-            </View>
+            </Animatable.View>
 
           </View>
 
-          <View style={{backgroundColor:'#0776a6',flex:1}}></View>
+          {/*<Animatable.View 
+      
+            style={{backgroundColor:'#0776a6',flex:1}}></Animatable.View>*/}
 
         </View>
       </Modal>

@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#3A8592',
     },
     viewForm:{
+        
         paddingTop:10,
         borderTopLeftRadius:50,
         borderTopRightRadius:50,
