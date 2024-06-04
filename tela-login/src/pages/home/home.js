@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { WebView } from 'react-native-webview';
 import { View, StyleSheet, Button, Share, TextInput } from 'react-native';
-import { useAuth } from '../../components/modal_login/AuthContext';
+import Modalogin from '../../components/modal_login/modal_login';
 
-const Home = (props, {navigation}) => {
+const Home = (props) => {
   const googleApiKey = "AIzaSyD8OZEHbRuZSeWDRE4X4Ls5dHCCv46C-nk"; // key da API do google
   const [address, setAddress] = useState('');
   const [neighborhood, setNeighborhood] = useState('');
@@ -132,21 +132,6 @@ const Home = (props, {navigation}) => {
       }
     </style>
     <script>
-
-    //funçao de tempo pro modal login
-    const { isAuthenticated, checkLoginStatus } = useAuth();
-
-    useEffect(() => {
-      const interval = setInterval(() => {
-        checkLoginStatus();
-        if (!isAuthenticated) {
-          navigation.replace('Login');
-        }
-      }, 10000); // Verifica a cada 10 segundos
-
-      return () => clearInterval(interval);
-    }, [isAuthenticated]);
-
       teste = 1;
 
       function initMap() {
