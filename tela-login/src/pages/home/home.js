@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { WebView } from 'react-native-webview';
-import { View, StyleSheet, Button, Share, TextInput } from 'react-native';
+import { View, StyleSheet, Button, Share } from 'react-native';
 import Modalogin from '../../components/modal_login/modal_login';
 
 const Home = (props) => {
@@ -11,6 +11,54 @@ const Home = (props) => {
   const [uf, setUf] = useState('');
   const [cep, setCep] = useState('');
   const [showAddressInfo, setShowAddressInfo] = useState(false);
+
+  const resetState = () => {
+    setAddress('');
+    setNeighborhood('');
+    setCity('');
+    setUf('');
+    setCep('');
+    setShowAddressInfo(false);
+    webViewRef.current.postMessage(JSON.stringify({ type: 'reset' }));
+  };
+
+  const handleShare = async () => {
+    try {
+      const result = await Share.share({
+        message: `Endereço: ${address}, Bairro: ${neighborhood}, Cidade: ${city}, Estado: ${uf}, CEP: ${cep}`,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          console.log('Compartilhado com tipo de atividade:', result.activityType);
+        } else {
+          console.log('Compartilhado');
+        }
+      } else if (result.action === Share.dismissedAction) {
+        console.log('Compartilhamento descartado');
+      }
+    } catch (error) {
+      console.error('Erro ao compartilhar:', error.message);
+    }
+  };
+
+  const handleMessage = (event) => {
+    const data = JSON.parse(event.nativeEvent.data);
+
+    if (data.type === 'share') {
+      handleShare();
+    } else if (data.type === 'reset') {
+      resetState();
+    } else {
+      setAddress(data.logradouro);
+      setNeighborhood(data.bairro);
+      setCity(data.localidade);
+      setUf(data.uf);
+      setCep(data.cep);
+      setShowAddressInfo(true);
+    }
+  };
+
+  const webViewRef = React.useRef(null);
 
   const htmlContent = `
   <!DOCTYPE html>
@@ -186,7 +234,24 @@ const Home = (props) => {
 
       function handleShareButtonClick() {
         window.ReactNativeWebView.postMessage(JSON.stringify({ type: 'share' }));
+      } 
+
+      function handleMessage(event) {
+        const data = JSON.parse(event.data);
+        if (data.type === 'reset') {
+          document.getElementById('cepInput').value = '';
+          document.getElementById('address').value = '';
+          document.getElementById('neighborhood').value = '';
+          document.getElementById('city').value = '';
+          document.getElementById('uf').value = '';
+          document.getElementById('addressInfo').style.display = 'none';
+        }
       }
+      window.addEventListener('message', handleMessage);
+      window.addEventListener('load', initMap);
+
+
+
     </script>
   </head>
   <body>
@@ -231,45 +296,11 @@ const Home = (props) => {
   </html>
 `;
 
-const handleShare = async () => {
-  try {
-    const result = await Share.share({
-      message: `Endereço: ${address}, Bairro: ${neighborhood}, Cidade: ${city}, Estado: ${uf}, CEP: ${cep}`,
-    });
-    if (result.action === Share.sharedAction) {
-      if (result.activityType) {
-        console.log('Compartilhado com tipo de atividade:', result.activityType);
-      } else {
-        console.log('Compartilhado');
-      }
-    } else if (result.action === Share.dismissedAction) {
-      console.log('Compartilhamento descartado');
-    }
-  } catch (error) {
-    console.error('Erro ao compartilhar:', error.message);
-  }
-};
-
-const handleMessage = (event) => {
-  const data = JSON.parse(event.nativeEvent.data);
-
-  if (data.type === 'share') {
-    handleShare();
-  } else {
-    setAddress(data.logradouro);
-    setNeighborhood(data.bairro);
-    setCity(data.localidade);
-    setUf(data.uf);
-    setCep(data.cep);
-    setShowAddressInfo(true);
-  }
-};
-
-
   return (
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1 }}>
         <WebView
+          ref={webViewRef}
           originWhitelist={['*']}
           source={{ html: htmlContent }}
           style={{ flex: 1 }}
@@ -277,10 +308,11 @@ const handleMessage = (event) => {
         />
       </View>
       <View>
-        <Modalogin/>   
+        <Modalogin/>
       </View>
-        <Button title='contatos' onPress={()=> props.navigation.navigate('contatos')}/>
-      </View>
+      <Button title='contatos' onPress={() => props.navigation.navigate('contatos')} />
+      <Button title='Home' onPress={resetState} />
+    </View>
   );
 };
 
