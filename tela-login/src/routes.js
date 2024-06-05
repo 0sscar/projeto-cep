@@ -6,7 +6,7 @@ const Stack = createStackNavigator();
 
 export function Routes(){
   return(
-    <Stack.Navigator initialRouteName="home" headerMode="none">
+    <Stack.Navigator initialRouteName="home" headerMode="false">
       <Stack.Screen
         name="home"
         component={Home}
