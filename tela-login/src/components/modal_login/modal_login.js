@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Modal, TextInput} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Modal, TextInput, Keyboard,Alert, ScrollView,Pressable,KeyboardAvoidingView} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect,useState } from 'react';
 import sjcl from 'sjcl';
@@ -63,22 +63,22 @@ export default function Modalogin() {
     if (storedUsername && storedPassword) {
       const decryptedStoredPassword = descriptografar(storedPassword);
       if (username === storedUsername && password === decryptedStoredPassword) {
-        alert("Logado com Sucesso");
+        Alert.alert("Sucesso !", "Seja bem vindo, " + username)
         setModalActive(false);
   
       } else {
-        alert("Login Inválido. Registre-se");
+        Alert.alert("Ops!", "Login Inválido.Favor Registre-se");
         setVisible(true);
       }
     } else {
-      alert("Usuário não encontrado. Registre-se");
+      Alert.alert("Ops!", "Usuário não encontrado. Registre-se");
       setVisible(true);
     }
   };
 
   const campoVazio = () => {
     if (!username || !password) {
-      alert("Campos faltando");
+      Alert.alert("Login Incompleto", "Há Campos faltando");
       return true;
     }
     return false;
@@ -90,7 +90,7 @@ export default function Modalogin() {
     const encryptedPassword = criptografar(password);
     await salvar('SaveName', username);
     await salvar('SaveSenha', encryptedPassword);
-    alert('Usuário Cadastrado');
+    Alert.alert("Sucesso !",'Usuário Cadastrado');
     hideButton();
   };
 
@@ -108,54 +108,63 @@ export default function Modalogin() {
       >
         <View style={main.outerView}>
 
+        <Pressable onPress={Keyboard.dismiss}>
+
           <Animatable.View 
-          animation='fadeInDown'
-          style={styles.viewTitulo}>
+            animation='fadeInDown'
+            style={styles.viewTitulo}>
 
             <Text style={styles.titulo}>Bem-vindo(a) de volta !</Text>
             <Text style={styles.subTit}>Faça login ou cadastre-se </Text>
 
             
-            <Animatable.View 
-              delay={200}
-              animation='fadeInUp'
-              style={styles.viewForm}>
-              <Text style={styles.textoUs}>Usuário:</Text>
-              
-              <TextInput
-                style={styles.campoTexto}
-                onChangeText={setUsername}
-                value={username}
-              />
+              <KeyboardAvoidingView
+              keyboardVerticalOffset={80}>
+                  <ScrollView>
+                <Animatable.View 
+                  delay={200}
+                  animation='fadeInUp'
+                  style={styles.viewForm}>
+                  
+                  <Text style={styles.textoUs}>Usuário:</Text>
+                  
+                  <TextInput
+                    style={styles.campoTexto}
+                    onChangeText={setUsername}
+                    value={username}
+                  />
 
-              <Text style={styles.textoPs}>Senha:</Text>
-              
-              <TextInput
-                style={styles.campoTexto}
-                onChangeText={setPassword}
-                value={password}
-                secureTextEntry={true}
-              />
-              {btnVisible && (
-                <TouchableOpacity
-                  //style={styles.btRegistrar}
-                  onPress={() => registrar(username, password)}
-                >
-                  <Text style={styles.txtRegistrar}>Registrar-se</Text>
-                </TouchableOpacity>
-              )}
+                  <Text style={styles.textoPs}>Senha:</Text>
+                  
+                  <TextInput
+                    style={styles.campoTexto}
+                    onChangeText={setPassword}
+                    value={password}
+                    secureTextEntry={true}
+                  />
+                  {btnVisible && (
+                    <TouchableOpacity
+                      //style={styles.btRegistrar}
+                      onPress={() => registrar(username, password)}
+                    >
+                      <Text style={styles.txtRegistrar}>Registrar-se</Text>
+                    </TouchableOpacity>
+                  )}
 
-              <TouchableOpacity
-                style={styles.btLogar}
-                onPress={() => verifyLogin(username, password)}
-              >
-                <Text style={styles.txtButtonEntrar}>Entrar</Text>
-              </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.btLogar}
+                    onPress={() => verifyLogin(username, password)}
+                  >
+                    <Text style={styles.txtButtonEntrar}>Entrar</Text>
+                  </TouchableOpacity>
+
+                 
+                </Animatable.View>
+                </ScrollView>
+              </KeyboardAvoidingView>
             
             </Animatable.View>
-
-          </Animatable.View>
-
+          </Pressable>
         </View>
       </Modal>
     </View>

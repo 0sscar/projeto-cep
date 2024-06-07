@@ -61,11 +61,11 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         color:'#d4d3f5',   //'#d4d3f5'
         fontSize:22,
-        borderBottomWidth:16,
+        borderBottomWidth:30,
         borderBottomColor:"#1087cc",
         borderRadius:7,
         paddingTop:20,
-        height: 40,
+        height: 48,
         margin:11,
         width:330,
         elevation:5
