@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { WebView } from 'react-native-webview';
-import { View, StyleSheet, Button, Share } from 'react-native';
+import { View, StyleSheet, Button, Share, TouchableOpacity, Text } from 'react-native';
 import Modalogin from '../../components/modal_login/modal_login';
 
 const Home = (props) => {
@@ -296,28 +296,68 @@ const Home = (props) => {
   </html>
 `;
 
-  return (
+return (
+  <View style={{ flex: 1 }}>
     <View style={{ flex: 1 }}>
-      <View style={{ flex: 1 }}>
-        <WebView
-          ref={webViewRef}
-          originWhitelist={['*']}
-          source={{ html: htmlContent }}
-          style={{ flex: 1 }}
-          onMessage={handleMessage}
-        />
-      </View>
-      <View>
-        <Modalogin/>
-      </View>
-      <Button title='contatos' onPress={() => props.navigation.navigate('contatos')} />
-      <Button title='Home' onPress={resetState} />
+      <WebView
+        ref={webViewRef}
+        originWhitelist={['*']}
+        source={{ html: htmlContent }}
+        style={{ flex: 1 }}
+        onMessage={handleMessage}
+      />
     </View>
-  );
+    <View>
+      <Modalogin/>
+    </View>
+    <View style={styles.buttonContainer}>
+      {showAddressInfo ? (
+        <>
+          <TouchableOpacity style={[styles.button, { width: 220, marginBottom: -20 }]} onPress={resetState}>
+            <Text style={[styles.buttonText, { marginBottom: 10 }]}>voltar</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity style={[styles.button, { width: 220, marginBottom: -20 }]} onPress={() => props.navigation.navigate('contatos')}>
+            <Text style={[styles.buttonText, { marginBottom: 10 }]}>contatos</Text>
+          </TouchableOpacity>
+        </>
+      ) : (
+        <TouchableOpacity style={[styles.button, { width: '100%', marginBottom: -20  }]} onPress={() => props.navigation.navigate('contatos')}>
+          <Text style={[styles.buttonText, { marginBottom: 10}]}>contatos</Text>
+        </TouchableOpacity>
+      )}
+    </View>
+  </View>
+);
+
 };
 
 const styles = StyleSheet.create({
-  // Adicione seus estilos aqui, se necessário
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20, 
+    marginTop: -80,
+  },
+  button: {
+    backgroundColor: '#0775A6',
+    padding: 10,
+    marginBottom: 20,
+    height: 55 , 
+    width: 200, 
+    marginBottom: -28,
+  },
+  buttonText: {
+    color: 'yellow',
+    fontSize: 22, 
+    textAlign: 'center',
+  },
+  separator: {
+    marginHorizontal: 10,
+    fontSize: 16,
+    color: 'white',
+  },
 });
 
 export default Home;
