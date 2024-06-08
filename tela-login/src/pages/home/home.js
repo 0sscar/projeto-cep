@@ -181,7 +181,7 @@ const Home = (props) => {
     </style>
     <script>
       teste = 1;
-
+      let alertShown = false;
       function initMap() {
 
         const map = new google.maps.Map(document.getElementById('map'), {
@@ -192,13 +192,16 @@ const Home = (props) => {
           position: { lat: -23.5505, lng: -46.6333 },
           map: map
         });
-        function myFunc() {
-          const cep = this.value.replace(/\\D/g, '');
-          if (cep.length !== 8) {
+      function myFunc() {
+        const cep = this.value.replace(/\D/g, '');
+        if (cep.length !== 8) {
+          if (!alertShown) {
             alert('CEP inválido.');
-            document.getElementById('addressInfo').style.display = 'none';
-            return;
+            alertShown = true; // Set flag to true after showing alert
           }
+          document.getElementById('addressInfo').style.display = 'none';
+          return;
+        }
     
           fetch(\`https://viacep.com.br/ws/\${cep}/json/\`)
             .then(res => res.json())
@@ -244,7 +247,8 @@ const Home = (props) => {
           document.getElementById('neighborhood').value = '';
           document.getElementById('city').value = '';
           document.getElementById('uf').value = '';
-          document.getElementById('addressInfo').style.display = 'none';
+          document.getElementById('addressInfo').style.display = 'none'; 
+          alertShown = false;
         }
       }
       window.addEventListener('message', handleMessage);
