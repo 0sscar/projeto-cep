@@ -318,16 +318,16 @@ return (
       {showAddressInfo ? (
         <>
           <TouchableOpacity style={[styles.button, { width: 220, marginBottom: -20 }]} onPress={resetState}>
-            <Text style={[styles.buttonText, { marginBottom: 10 }]}>voltar</Text>
+            <Text style={[styles.buttonText, { marginBottom: 10 }]}>←</Text>
           </TouchableOpacity>
           
           <TouchableOpacity style={[styles.button, { width: 220, marginBottom: -20 }]} onPress={() => props.navigation.navigate('contatos')}>
-            <Text style={[styles.buttonText, { marginBottom: 10 }]}>contatos</Text>
+            <Text style={[styles.buttonText, { marginBottom: 10 }]}>🅘</Text>
           </TouchableOpacity>
         </>
       ) : (
         <TouchableOpacity style={[styles.button, { width: '100%', marginBottom: -20  }]} onPress={() => props.navigation.navigate('contatos')}>
-          <Text style={[styles.buttonText, { marginBottom: 10}]}>contatos</Text>
+          <Text style={[styles.buttonText, { marginBottom: 10}]}>🅘 contatos</Text>
         </TouchableOpacity>
       )}
     </View>
