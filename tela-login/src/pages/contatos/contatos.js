@@ -1,49 +1,74 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text, FlatList, Image, Linking, TouchableOpacity } from "react-native";
-import { FontAwesome } from '@expo/vector-icons';  // Adicione esta linha para usar ícones
-import styles from "../../components/modal_login/style_contents";
+import { FontAwesome } from '@expo/vector-icons'; // Adicione esta linha para usar ícones
 
 export function Contatos(props) {
     const [people, setPeople] = useState([
         { name: 'David', key: 'Lukazdrz@gmail.com', github: 'https://github.com/Dav11ucas' },
         { name: 'Oscar', key: 'oscargabrieled@gmail.com', github: 'https://github.com/0sscar' },
         { name: 'Thalles', key: 'thallesgmkr@gmail.com', github: 'https://github.com/Bruthalles' },
-        { name: 'Brenno', key: '', github: '' }
+        { name: 'Brenno', key: 'brennomachado080@gmail.com', github: 'https://github.com/Brenin-20' }
     ]);
+
+    const [expandedIndex, setExpandedIndex] = useState(null);
 
     const handlePress = () => {
         Linking.openURL('https://github.com/0sscar/projeto-cep');
     };
 
+    const handleIssue = () => {
+        Linking.openURL('https://github.com/0sscar/projeto-cep/issues');
+    };
     const handleEmailPress = (email) => {
-        Linking.openURL(`mailto:${email}`);
+        Linking.openURL(`mailto:${email}`)
     };
 
     const handleGithubPress = (github) => {
         Linking.openURL(github);
     };
 
+    const toggleExpand = (index) => {
+        setExpandedIndex(index === expandedIndex ? null : index);
+    };
+
     return (
         <View style={contato.container}>
-            <Text style={contato.titulo}>Área de contatos</Text>
-            <Text style={contato.titulo}>envolvidos no projeto: </Text>
+            
+            <View style={{height:90}}>
+                <Text style={contato.titulo}>Área de contatos</Text>
+            </View>
+
+            <View style={contato.separator}/>
+            
+            <Text style={contato.subtitulo}>Envolvidos no projeto: </Text>
 
             <FlatList
                 data={people}
-                renderItem={({ item }) => (
+                renderItem={({ item, index }) => (
                     <View style={contato.itemContainer}>
-                        <Text style={contato.itemName}>{item.name}</Text>
-                        {item.key ? (
-                            <TouchableOpacity onPress={() => handleEmailPress(item.key)}>
-                                <Text style={contato.itemEmail}>e-mail: {item.key}</Text>
+                        <View style={contato.minimizedContainer}>
+                            <Text style={contato.itemName}>{item.name}</Text>
+                            <TouchableOpacity 
+                                style={contato.expandButton}
+                                onPress={() => toggleExpand(index)}>
+                                <Text style={contato.TextexpandButton}>{expandedIndex === index ? "ꜛ" : "ꜜ"}</Text>
                             </TouchableOpacity>
-                        ) : null}
-                        {item.github ? (
-                            <TouchableOpacity style={contato.githubContainer} onPress={() => handleGithubPress(item.github)}>
-                                <FontAwesome name="github" size={24} color="#333" />
-                                <Text style={contato.itemGithub}>GitHub</Text>
-                            </TouchableOpacity>
-                        ) : null}
+                        </View>
+                        {expandedIndex === index && (
+                            <View>
+                                {item.key ? (
+                                    <TouchableOpacity onPress={() => handleEmailPress(item.key)}>
+                                        <Text style={contato.itemEmail}>{item.key}</Text>
+                                    </TouchableOpacity>
+                                ) : null}
+                                {item.github ? (
+                                    <TouchableOpacity style={contato.githubContainer} onPress={() => handleGithubPress(item.github)}>
+                                        <FontAwesome name="github" size={24} color="#333" />
+                                        <Text style={contato.itemGithub}>GitHub</Text>
+                                    </TouchableOpacity>
+                                ) : null}
+                            </View>
+                        )}
                     </View>
                 )}
             />
@@ -59,6 +84,10 @@ export function Contatos(props) {
                     style={contato.btnGit}>
                     <Text style={contato.urlGit}> Clique aqui para ver o projeto </Text>
                 </TouchableOpacity>
+
+                <TouchableOpacity onPress={handleIssue}>
+                    <Text style ={contato.att}>Atualizações e Feedback</Text>
+                </TouchableOpacity>
             </View>
 
             <TouchableOpacity 
@@ -73,17 +102,32 @@ export function Contatos(props) {
 const contato = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#398592',
+        backgroundColor: '#52a8bf', //#398592
         alignItems: 'center',
         padding: 10,
     },
+    separator:{
+        elevation:30,
+        height:2,
+        width:1000,
+        backgroundColor:"#434647",
+
+    },
     titulo: {
         fontSize: 22,
-        alignSelf: 'center',
+        paddingRight:200,
         paddingTop: '12%',
         marginBottom: 10,
         color: '#fff',
         fontWeight: 'bold',
+    },
+    subtitulo: {
+            fontSize: 22,
+            alignSelf: 'center',
+            paddingTop: '12%',
+            marginBottom: 10,
+            color: '#fff',
+            fontWeight: 'bold',
     },
     itemContainer: {
         backgroundColor: '#fff',
@@ -95,10 +139,20 @@ const contato = StyleSheet.create({
         borderWidth: 1,
         elevation: 3,
     },
+    minimizedContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        
+    },
+    att:{
+        textDecorationLine:'underline'
+    },
     itemName: {
         fontSize: 18,
         fontWeight: 'bold',
         color: '#333',
+        paddingRight:80
     },
     itemEmail: {
         fontSize: 16,
@@ -112,9 +166,26 @@ const contato = StyleSheet.create({
     },
     itemGithub: {
         fontSize: 16,
-        color: '#333',
+        color: '#000',
         textDecorationLine: 'underline',
         marginLeft: 5,
+    },
+    TextexpandButton: {
+        fontSize: 20,
+        borderColor:"#000",
+        color: '#000', // 
+        
+       
+    },
+    expandButton: {
+        alignItems:'center',
+        justifyContent:'center',
+        borderColor:"#000",
+        borderRadius:5,
+        width:30,
+        borderWidth:1.5,
+        
+       
     },
     btnGit: {
         elevation: 10,
