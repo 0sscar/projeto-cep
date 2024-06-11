@@ -3,11 +3,21 @@
     "version": ">= 9.2.0"
   },
   "build": {
+    "preview" :{
+      "android" :{
+        "buildType": "apk"
+      }
+    },
     "development": {
       "developmentClient": true,
       "distribution": "internal"
     },
-    "preview": {
+    "preview2":{
+      "android":{
+        "gradleCommand" : ":app:assembleRelease"
+      }
+    },
+    "preview3": {
       "distribution": "internal"
     },
     "production": {}

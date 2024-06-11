@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "tela-login",
-    "slug": "tela-login",
+    "name": "Busca-Cep",
+    "slug": "Busca-Cep",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
