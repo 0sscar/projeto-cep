@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Modal, TextInput, Keyboard,Alert, ScrollView,Pressable,KeyboardAvoidingView} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Modal, TextInput, Keyboard,Alert, ScrollView,Pressable,KeyboardAvoidingView,StatusBar} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect,useState } from 'react';
 import sjcl from 'sjcl';
@@ -101,6 +101,11 @@ export default function Modalogin() {
 
   return (
     <View style={main.container}>
+      <StatusBar
+      backgroundColor={"#3A8592"}
+      barStyle={"black"}
+      hidden={true}
+      ></StatusBar>
       <Modal
         animationType='fade'
         transparent={true}

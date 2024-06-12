@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, FlatList, Image, Linking, TouchableOpacity } from "react-native";
+import { View, StyleSheet,StatusBar, Text, FlatList, Image, Linking, TouchableOpacity } from "react-native";
 import { FontAwesome } from '@expo/vector-icons'; // Adicione esta linha para usar ícones
 
 export function Contatos(props) {
@@ -33,7 +33,12 @@ export function Contatos(props) {
 
     return (
         <View style={contato.container}>
-            
+            <StatusBar
+                backgroundColor={"#3A8592"}
+                barStyle={"black"}
+                hidden={true}
+
+            ></StatusBar>
             <View style={{height:90}}>
                 <Text style={contato.titulo}>Área de contatos</Text>
             </View>

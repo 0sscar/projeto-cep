@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { WebView } from 'react-native-webview';
-import { View, StyleSheet, Button, Share, TouchableOpacity, Text } from 'react-native';
+import { View, StyleSheet, StatusBar,Button, Share, TouchableOpacity, Text } from 'react-native';
 import Modalogin from '../../components/modal_login/modal_login';
 
 const Home = (props) => {
@@ -302,6 +302,11 @@ const Home = (props) => {
 
 return (
   <View style={{ flex: 1 }}>
+    <StatusBar
+      backgroundColor={"#3A8592"}
+      barStyle={"black"}
+      hidden={true}
+      ></StatusBar>
     <View style={{ flex: 1 }}>
       <WebView
         ref={webViewRef}
